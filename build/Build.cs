@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Security.Policy;
 using CliWrap;
@@ -43,6 +45,8 @@ class Build : NukeBuild
 
   public string OctopusChannel { get; set; }
 
+
+  AbsolutePath StagingDirectory => RootDirectory / "staging";
 
   AbsolutePath SourceDirectory => RootDirectory / "src";
 
@@ -134,16 +138,17 @@ class Build : NukeBuild
     .AssuredAfterFailure()
     .Executes(() =>
     {
-      AutoChangelogTool($"-v  {OctopusVersion} -o {ChangeLogFile}",
-        RootDirectory.ToString()); // Use .autochangelog settings in file.
+      string path = Path.Combine(StagingDirectory, "output.zip");
+      ZipFile.CreateFromDirectory(OutputDirectory, path);
     });
 
   Target OctopusBuildInfo => _ => _
       .DependsOn(Changelog)
         .Executes(async () =>
         {
-          var result = await Cli.Wrap("octopus.exe")
-            .WithArguments(["cre"])
+          // Using old cli due to command unavailability.
+          var result = await Cli.Wrap("octo.exe")
+            .WithArguments(["build-information"])
             .WithWorkingDirectory(RootDirectory)
             .ExecuteAsync();
         });
