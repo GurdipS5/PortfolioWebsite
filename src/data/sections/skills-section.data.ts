@@ -34,14 +34,12 @@ const skillsSectionData = {
 
         aws({
           level: 5,
-          description:
-            'Proin ut erat sed massa tempus suscipit. Mauris efficitur nunc sem, nec scelerisque ligula bibendum ut.',
+          description: 'I have five years experience of AWS.',
         }),
 
         blazor({
           level: 5,
-          description:
-            'Proin ut erat sed massa tempus suscipit. Mauris efficitur nunc sem, nec scelerisque ligula bibendum ut.',
+          description: 'I have extensive experience in Blazor, creating components.',
         }),
 
         csharp({
@@ -59,30 +57,25 @@ const skillsSectionData = {
         helm({
           level: 5,
           description:
-            'Proin ut erat sed massa tempus suscipit. Mauris efficitur nunc sem, nec scelerisque ligula bibendum ut.',
+            'Experienced in deploying, managing, and scaling Kubernetes applications using Helm charts for streamlined and efficient orchestration.',
         }),
 
         kubernetes({
           level: 5,
           description:
-            'Proin ut erat sed massa tempus suscipit. Mauris efficitur nunc sem, nec scelerisque ligula bibendum ut.',
+            'Proficient in deploying, managing, and scaling containerized applications on Kubernetes, ensuring robust and scalable infrastructure orchestration.',
         }),
 
         octopusdeploy({
           level: 5,
           description:
-            'Proin ut erat sed massa tempus suscipit. Mauris efficitur nunc sem, nec scelerisque ligula bibendum ut.',
+            'Skilled in utilizing Octopus Deploy for seamless automation and orchestration of deployment pipelines across diverse environments.',
         }),
 
         teamcity({
           level: 5,
           description:
             'I am adept at using TeamCity for continuous integration and continuous deployment (CI/CD), ensuring streamlined and efficient development workflows. My expertise includes build automation and artifact management.',
-        }),
-
-        helm({
-          level: 4,
-          description: 'Nulla interdum pellentesque ultricies. Ut id eros commodo, ultrices ligula eu, elementum ante.',
         }),
 
         postgreSql({ level: 2 }),

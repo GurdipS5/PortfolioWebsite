@@ -39,7 +39,7 @@ const experienceSectionData = {
       image: import('@/assets/logos/virginmoney.jpg'),
       dates: [new Date('2020-02'), null],
       description: `
-        - Led a seamless migration of 50+ applications to AWS/Azure, resulting in a 30% reduction in infrastructure costs and improved scalability.
+        - Led a seamless migration of fifty applications to AWS/Azure, resulting in a 30% reduction in infrastructure costs and improved scalability.
         - Implemented efficient resource allocation strategies, leading to a 30% reduction in cloud infrastructure costs.
         - Successfully designed, deployed, and maintained highly available Kubernetes clusters in production environments, supporting over 100 microservices, ensuring seamless application delivery and scalability.
         - Developed common Terraform modules, reducing code duplication and time to release and leading to an increase in developer productivity and code standardisation, reducing bugs and time to deployment.

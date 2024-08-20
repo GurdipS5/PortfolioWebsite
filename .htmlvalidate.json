@@ -1,0 +1,7 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "require-sri": "error",
+    "void-style": "error"
+  }
+}

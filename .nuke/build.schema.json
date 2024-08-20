@@ -9,10 +9,7 @@
         "Configuration": {
           "type": "string",
           "description": "Configuration to build - Default is 'Debug' (local) or 'Release' (server)",
-          "enum": [
-            "Debug",
-            "Release"
-          ]
+          "enum": ["Debug", "Release"]
         },
         "Continue": {
           "type": "boolean",
@@ -47,6 +44,10 @@
           "type": "boolean",
           "description": "Disables displaying the NUKE logo"
         },
+        "OctopusApiKey": {
+          "type": "string",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
+        },
         "Partition": {
           "type": "string",
           "description": "Partition to use on CI"
@@ -62,6 +63,10 @@
             "type": "string"
           }
         },
+        "ProGetApiKey": {
+          "type": "string",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
+        },
         "Root": {
           "type": "string",
           "description": "Root directory during build execution"
@@ -73,6 +78,8 @@
             "type": "string",
             "enum": [
               "Changelog",
+              "CheckInGit",
+              "CheckSecrets",
               "CodeBuild",
               "CSpellTarget",
               "NpmInstall",
@@ -81,7 +88,9 @@
               "PostInstall",
               "Prettier",
               "PrettierWrite",
+              "PushToProGet",
               "SetVersion",
+              "SnykVulnerabilityCheck",
               "ZipBuild"
             ]
           }
@@ -93,6 +102,8 @@
             "type": "string",
             "enum": [
               "Changelog",
+              "CheckInGit",
+              "CheckSecrets",
               "CodeBuild",
               "CSpellTarget",
               "NpmInstall",
@@ -101,7 +112,9 @@
               "PostInstall",
               "Prettier",
               "PrettierWrite",
+              "PushToProGet",
               "SetVersion",
+              "SnykVulnerabilityCheck",
               "ZipBuild"
             ]
           }
@@ -109,12 +122,7 @@
         "Verbosity": {
           "type": "string",
           "description": "Logging verbosity during build execution. Default is 'Normal'",
-          "enum": [
-            "Minimal",
-            "Normal",
-            "Quiet",
-            "Verbose"
-          ]
+          "enum": ["Minimal", "Normal", "Quiet", "Verbose"]
         }
       }
     }

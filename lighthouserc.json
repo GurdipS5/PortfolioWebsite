@@ -1,0 +1,36 @@
+{
+  "ci": {
+    "assert": {
+      "preset": "lighthouse:no-pwa",
+      "assertions": {
+        "categories:performance": ["warn", { "aggregationMethod": "optimistic", "minScore": 0.8 }],
+        "categories:accessibility": ["warn", { "aggregationMethod": "optimistic", "minScore": 0.9 }]
+      }
+    },
+    "collect": {
+      "method": "node",
+      "additive": false,
+      "headful": false,
+      "numberOfRuns": 3,
+      "puppeteerScript": "./fake-login.js",
+      "url": ["https://www.gurucharan.in/", "https://www.gurucharan.in/about/"],
+      "settings": {
+        "config-path": "./light-house-config.js"
+      }
+    },
+    "upload": {
+      "target": "lhci",
+      "token": "32353dcd-e1aa-43ac-85d2-3da764d9f4ef",
+      "serverBaseUrl": "https://lhci-demo-app.azurewebsites.net/"
+    },
+    "server": {
+      "port": 9001,
+      "storage": {
+        "storageMethod": "sql",
+        "sqlConnectionUrl": "postgresql://<username>%40<hostname>:myPassword@<hostname>.postgres.database.azure.com:5432/",
+        "sqlDialect": "postgres",
+        "sqlDatabasePath": "lhci.db"
+      }
+    }
+  }
+}

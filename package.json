@@ -1,7 +1,7 @@
 {
   "name": "devscard",
   "description": "Template for creating a comprehensive virtual CV for developers.",
-  "version": "0.0.0-g5b45e90314",
+  "version": "0.0.0-g18d00cba30",
   "private": true,
   "engines": {
     "node": ">=18",
@@ -23,16 +23,20 @@
     "astro:check": "astro check",
     "ts:check": "tsc --jsx preserve --skipLibCheck",
     "check": "concurrently npm:*:check",
-    "prepare": "husky"
+    "version": "npx nbgv get-version -p ./",
+    "prepare": "husky",
+    "get-version": "nbgv get-version --format json | jq -r '.Version' | xargs npm version --no-git-tag-version"
   },
   "dependencies": {
     "@floating-ui/dom": "1.4.4",
+    "@nickreese/seo-lint": "1.1.2",
     "auto-changelog": "2.4.0",
     "broken-link-checker": "0.6.7",
     "czg": "1.9.3",
     "iconify-icon": "1.0.8",
     "nanoid": "4.0.2",
-    "nerdbank-gitversioning": "3.6.139"
+    "nerdbank-gitversioning": "3.6.139",
+    "npm": "10.8.1"
   },
   "devDependencies": {
     "@astrojs/image": "0.17.2",
@@ -46,6 +50,7 @@
     "cspell": "8.9.1",
     "date-fns": "2.30.0",
     "favicons": "7.1.3",
+    "html-validate": "8.20.1",
     "husky": "9.0.11",
     "iconify-icon-names": "1.1.0",
     "immer": "10.0.2",
