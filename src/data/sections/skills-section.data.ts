@@ -51,7 +51,7 @@ const skillsSectionData = {
         dotnet({
           level: 5,
           description:
-            'I have vast expertise in the build and deployment of dotnet core applications, up to dotnet core 8.',
+            'I have vast amounts of expertise in the build and deployment of dotnet core applications, up to dotnet core 8.',
         }),
 
         helm({
