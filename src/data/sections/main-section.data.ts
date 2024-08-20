@@ -13,7 +13,7 @@ const mainSectionData = {
   fullName: 'Gurdip Sira',
   role: 'DevOps Lead',
   details: [
-    { label: 'Email', value: 'gurdip.sira@gmail.com', url: 'mailto:mark.freeman.dev@gmail.com' },
+    { label: 'Email Address', value: 'gurdip.sira@gmail.com', url: 'mailto:mark.freeman.dev@gmail.com' },
     { label: 'From', value: 'London, England' },
     { label: 'Salary range', value: '100  000 - 110 000 GBP' },
   ],
