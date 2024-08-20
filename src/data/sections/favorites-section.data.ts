@@ -9,7 +9,7 @@ const favoritesSectionData = {
     visible: true,
   },
   books: {
-    title: 'Books I read',
+    title: 'Books I have read',
     data: [
       {
         image: import('@/assets/favorites/books/91YfNb49PLL._AC_UF1000,1000_QL80_.jpg'),
