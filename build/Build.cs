@@ -1,18 +1,24 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Security.Policy;
+using System.Text;
 using CliWrap;
+using CliWrap.Buffered;
 using Nuke.Common;
 using Nuke.Common.ChangeLog;
 using Nuke.Common.CI;
 using Nuke.Common.CI.TeamCity;
 using Nuke.Common.Execution;
+using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
+using Nuke.Common.Tools.GitHub;
 using Nuke.Common.Utilities.Collections;
+using Octokit;
 using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
@@ -36,6 +42,8 @@ class Build : NukeBuild
 
   [Secret] [Parameter] readonly string ProGetApiKey;
 
+  [Secret] [Parameter] readonly string GithubKey;
+
 
 
   [PathVariable("npm")] readonly Tool Npm;
@@ -56,6 +64,8 @@ class Build : NukeBuild
 
   [PathVariable("ggshield")] readonly Tool GGCli;
 
+  GitRepository Repository;
+
   public string ChangeLogFile = "";
 
   public string OctopusVersion = "";
@@ -63,6 +73,8 @@ class Build : NukeBuild
   public string OctopusProject = "Portfolio";
 
   public string OctopusServerUrl = "http://octopusd.gssira.com";
+
+
 
   public string OctopusChannel { get; set; }
 
@@ -148,7 +160,7 @@ class Build : NukeBuild
     });
 
   Target PostInstall => _ => _
-    .DependsOn(CodeBuild)
+    .DependsOn(CheckSecrets)
     .AssuredAfterFailure()
     .Executes(() =>
     {
@@ -162,7 +174,10 @@ class Build : NukeBuild
     .Executes(async () =>
     {
 
-      Npm("nbgv cloud");
+      if (NukeBuild.IsServerBuild)
+      {
+        Npm("nbgv cloud");
+      }
 
     });
 
@@ -187,7 +202,27 @@ class Build : NukeBuild
     .Executes(() =>
     {
 
+      if (IsLocalBuild)
+      {
+        var stdOutBuffer = new StringBuilder();
 
+        var dbDailyTasks = Cli.Wrap("powershell")
+          .WithArguments(new[] { "Split-Path -Leaf (git remote get-url origin)" })
+          .WithStandardOutputPipe(PipeTarget.ToStringBuilder(stdOutBuffer))
+          .ExecuteBufferedAsync();
+
+        var repoName = stdOutBuffer.ToString();
+
+        var gitCommand = "git";
+        var gitAddArgument = @"add -A";
+        var gitCommitArgument = @"commit -m ""chore(ci): checking in changed code from local ci""";
+        var gitPushArgument =
+          $@"push https://{GithubKey}@github.com/{Repository.GetGitHubOwner()}/{repoName}";
+
+        Process.Start(gitCommand, gitAddArgument).WaitForExit();
+        Process.Start(gitCommand, gitCommitArgument).WaitForExit();
+        Process.Start(gitCommand, gitPushArgument).WaitForExit();
+      }
 
     });
 
