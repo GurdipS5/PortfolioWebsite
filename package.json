@@ -25,7 +25,8 @@
     "check": "concurrently npm:*:check",
     "version": "npx nbgv get-version -p ./",
     "prepare": "husky",
-    "get-version": "nbgv get-version --format json | jq -r '.Version' | xargs npm version --no-git-tag-version"
+    "get-version-win": "czg; npm version $(nbgv get-version --format json | jq -r '.AssemblyVersion') --no-git-tag-version",
+    "get-version": "nbgv get-version --format json | jq -r '.AssemblyVersion' | xargs npm version --no-git-tag-version"
   },
   "dependencies": {
     "@floating-ui/dom": "1.4.4",
