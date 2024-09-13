@@ -48,7 +48,7 @@ class Build : NukeBuild
 
   [PathVariable("npm")] readonly Tool Npm;
 
-  [PathVariable] readonly Tool CSpell;
+  [PathVariable("cspell")] readonly Tool CSpell;
 
   [PathVariable("nuget")] readonly Tool NuGet;
 
@@ -61,6 +61,9 @@ class Build : NukeBuild
   /// </summary>
   [PathVariable("octo")]
   readonly Tool OctoCli;
+
+  [PathVariable("dotnet")]
+  readonly Tool Dotnet;
 
   [PathVariable("ggshield")] readonly Tool GGCli;
 
@@ -154,7 +157,6 @@ class Build : NukeBuild
     {
       if (IsLocalBuild)
       {
-        //     GGShield("auth login");
         GGCli($"--config-path {GgConfig} secret scan commit-range HEAD~1");
       }
     });
@@ -231,21 +233,20 @@ class Build : NukeBuild
 /// <summary>
   ///  Zips build output to send to ProGet.
   /// </summary>
-  Target ZipBuild => _ => _
+  Target CreateNupkg => _ => _
     .DependsOn(CheckInGit)
     .Description("Creates a zip of the build, to send to ProGet - used by OD.")
     .AssuredAfterFailure()
     .Executes(() =>
     {
-      string path = Path.Combine(StagingDirectory, "output.zip");
-      ZipFile.CreateFromDirectory(OutputDirectory, path);
+      Dotnet($"pack --configuration release --output {StagingDirectory}");
     });
 
   /// <summary>
   ///
   /// </summary>
   Target OctopusBuildInfo => _ => _
-      .DependsOn(ZipBuild)
+      .DependsOn(CreateNupkg)
       .AssuredAfterFailure()
         .Executes(async () =>
         {
@@ -265,18 +266,18 @@ class Build : NukeBuild
         });
 
   /// <summary>
-  /// Push proceeding zip to ProGet.
+  /// Push proceeding zip ton ProGet.
   /// </summary>
   Target PushToProGet => _ => _
     .DependsOn(OctopusBuildInfo)
     .AssuredAfterFailure()
     .Executes(() =>
     {
-      NuGet($"push  {packagePath}  {ProGetApiKey} -src {progetUrl}");
+      NuGet($"push {packagePath} {ProGetApiKey} -src {progetUrl}");
     });
 
   /// <summary>
-  ///  Create relese in Octopus Deploy. Uses new CLI.
+  ///  Create release in Octopus Deploy. Uses new CLI.
   /// </summary>
   Target OctopusCreateRelease => _ => _
       .DependsOn(PushToProGet)

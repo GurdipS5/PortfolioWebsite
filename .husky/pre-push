@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+
+while read local_ref local_sha remote_ref remote_sha; do
+    # Iterate through commits in the range
+    for commit in $(git rev-list --no-walk $local_sha^..$local_sha); do
+        # Check commit message for your rules
+        commit_message=$(git log --format=%B -n 1 $commit)
+        if [[ $commit_message != *chore* ]]; then
+          c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File '..\build\build.ps1'
+        fi
+    done
+done
+s
