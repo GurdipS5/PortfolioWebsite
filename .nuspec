@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>Gurdip Portfolio</id>
+    <id>GurdipPortfolio</id>
     <version>1.0.9+cd46792ea3</version>
     <authors>YourName</authors>
     <owners>YourName</owners>
