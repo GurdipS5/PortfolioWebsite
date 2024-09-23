@@ -250,6 +250,8 @@ class Build : NukeBuild
         Log.Information(repoName);
         Log.Information(Repository.Endpoint);
 
+
+
         var gitCommand = "git";
         var gitAddArgument = @"add -A";
         var gitCommitArgument = @"commit -m ""chore(ci): checking in changed code from local ci""";
