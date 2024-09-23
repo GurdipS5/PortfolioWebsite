@@ -1,4 +1,4 @@
-.nuke
-.teamcity
+/.nuke
+/.teamcity
 workflows
 **/*.nupkg
