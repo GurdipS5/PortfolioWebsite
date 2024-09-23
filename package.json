@@ -1,7 +1,7 @@
 {
   "name": "devscard",
   "description": "Template for creating a comprehensive virtual CV for developers.",
-  "version": "1.0.8-g46d13d386a",
+  "version": "1.0.9-gcd46792ea3",
   "private": true,
   "engines": {
     "node": ">=18",
@@ -25,7 +25,9 @@
     "check": "concurrently npm:*:check",
     "version": "npx nbgv get-version -p ./",
     "prepare": "husky",
-    "get-version-win": "czg; npm version $(nbgv get-version --format json | jq -r '.NpmPackageVersion') --no-git-tag-version",
+    "update-version": "nbgv get-version --json > temp_version.json && node updateVersion.js",
+    "set-version-nuspec": "node buildscripts\\updateversion.js",
+    "get-version-win": "npm version $(nbgv get-version --format json | jq -r '.NpmPackageVersion') --no-git-tag-version",
     "get-version": "nbgv get-version --format json | jq -r '.AssemblyVersion' | xargs npm version --no-git-tag-version"
   },
   "dependencies": {

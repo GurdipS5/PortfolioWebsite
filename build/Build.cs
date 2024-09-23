@@ -19,9 +19,12 @@ using Nuke.Common.Tooling;
 using Nuke.Common.Tools.GitHub;
 using Nuke.Common.Utilities.Collections;
 using Octokit;
+using Serilog;
 using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
+using System.IO;
+using System.Text.Json;
 
 [TeamCity(AutoGenerate = true), TeamCityToken("test", "c202f1a5-e758-4ae4-be74-8dbb2fda3483")]
 class Build : NukeBuild
@@ -32,6 +35,8 @@ class Build : NukeBuild
   ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
   ///   - Microsoft VSCode           https://nuke.build/vscode
 
+
+  TeamCity TeamCity => TeamCity.Instance;
 
   /// <summary>
   ///
@@ -67,7 +72,7 @@ class Build : NukeBuild
 
   [PathVariable("ggshield")] readonly Tool GGCli;
 
-  GitRepository Repository;
+  [GitRepository] readonly GitRepository Repository;
 
   public string ChangeLogFile = "";
 
@@ -157,7 +162,7 @@ class Build : NukeBuild
     {
       if (IsLocalBuild)
       {
-        GGCli($"--config-path {GgConfig} secret scan commit-range HEAD~1");
+        GGCli($"--config-path {GgConfig.ToString()} secret scan commit-range HEAD~1");
       }
     });
 
@@ -192,28 +197,54 @@ class Build : NukeBuild
     .AssuredAfterFailure()
     .Executes(() =>
     {
-      AutoChangelogTool($"-v  {OctopusVersion} -o {ChangeLogFile}",
+      if (NukeBuild.IsLocalBuild) {
+            AutoChangelogTool($"-v  {OctopusVersion} -o {ChangeLogFile}",
+              RootDirectory.ToString()); // Use .autochangelog settings in file.
+      }
+
+      else {
+      AutoChangelogTool($"-v {TeamCity.BuildNumber} -o {ChangeLogFile}",
         RootDirectory.ToString()); // Use .autochangelog settings in file.
+      }
+    });
+
+  Target SetOctopusVersion => _ => _
+    .DependsOn(Changelog)
+    .Description("")
+    .AssuredAfterFailure()
+    .Executes(async () =>
+    {
+
+      string jsonString = File.ReadAllText("package.json");
+
+      // Parse the JSON
+      JsonDocument jsonDoc = JsonDocument.Parse(jsonString);
+
+      // Get a specific value, e.g., "version"
+      OctopusVersion = jsonDoc.RootElement.GetProperty("version").GetString();
     });
 
 
   Target CheckInGit => _ => _
-    .DependsOn(Changelog)
+    .DependsOn(SetOctopusVersion)
     .Description("")
     .AssuredAfterFailure()
-    .Executes(() =>
+    .Executes(async () =>
     {
 
       if (IsLocalBuild)
       {
         var stdOutBuffer = new StringBuilder();
 
-        var dbDailyTasks = Cli.Wrap("powershell")
+        var dbDailyTasks =  await Cli.Wrap("powershell")
           .WithArguments(new[] { "Split-Path -Leaf (git remote get-url origin)" })
           .WithStandardOutputPipe(PipeTarget.ToStringBuilder(stdOutBuffer))
-          .ExecuteBufferedAsync();
+          .ExecuteAsync();
 
         var repoName = stdOutBuffer.ToString();
+
+        Log.Information(repoName);
+        Log.Information(Repository.Endpoint);
 
         var gitCommand = "git";
         var gitAddArgument = @"add -A";
@@ -228,10 +259,8 @@ class Build : NukeBuild
 
     });
 
-
-
-/// <summary>
-  ///  Zips build output to send to ProGet.
+  /// <summary>
+  /// Zips build output to send to ProGet.
   /// </summary>
   Target CreateNupkg => _ => _
     .DependsOn(CheckInGit)
@@ -243,14 +272,14 @@ class Build : NukeBuild
     });
 
   /// <summary>
-  ///
+  /// Creates Octopus Build Information.
   /// </summary>
   Target OctopusBuildInfo => _ => _
       .DependsOn(CreateNupkg)
       .AssuredAfterFailure()
         .Executes(async () =>
         {
-          if (NukeBuild.IsServerBuild)
+          if (NukeBuild.IsLocalBuild)
           {
             Console.WriteLine("Local build.");
           }
@@ -266,7 +295,7 @@ class Build : NukeBuild
         });
 
   /// <summary>
-  /// Push proceeding zip ton ProGet.
+  /// Push proceeding nupkg ton ProGet.
   /// </summary>
   Target PushToProGet => _ => _
     .DependsOn(OctopusBuildInfo)

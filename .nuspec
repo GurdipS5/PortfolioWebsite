@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Gurdip Portfolio</id>
+    <version>1.0.9+cd46792ea3</version>
+    <authors>YourName</authors>
+    <owners>YourName</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Your package description goes here.</description>
+    <dependencies>
+      <!-- Add dependencies here, if any -->
+      <dependency id="Newtonsoft.Json" version="12.0.1" />
+    </dependencies>
+  </metadata>
+  <files>
+     <!-- Include all .dll files from bin\Debug -->
+      <file src="README.md" target="content" />
+
+      <!-- Include everything from the content folder -->
+      <file src="dist\**\*" target="content" />
+  </files>
+</package>

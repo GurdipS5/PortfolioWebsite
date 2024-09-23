@@ -1,1 +1,3 @@
-/.nuke
+nuke
+teamcity
+**/*.nupkggu

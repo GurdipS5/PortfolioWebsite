@@ -94,6 +94,7 @@
               "Prettier",
               "PrettierWrite",
               "PushToProGet",
+              "SetOctopusVersion",
               "SetVersion",
               "SnykVulnerabilityCheck"
             ]
@@ -118,6 +119,7 @@
               "Prettier",
               "PrettierWrite",
               "PushToProGet",
+              "SetOctopusVersion",
               "SetVersion",
               "SnykVulnerabilityCheck"
             ]
