@@ -72,6 +72,10 @@ class Build : NukeBuild
 
   [PathVariable("ggshield")] readonly Tool GGCli;
 
+  [PathVariable("nuget")]
+  readonly Tool Nuget;
+
+
   [GitRepository] readonly GitRepository Repository;
 
   public string ChangeLogFile = "";
@@ -268,7 +272,7 @@ class Build : NukeBuild
     .AssuredAfterFailure()
     .Executes(() =>
     {
-      Dotnet($"pack --configuration release --output {StagingDirectory}");
+      Nuget($"pack .nuspec -OutputDirectory {StagingDirectory}");
     });
 
   /// <summary>
