@@ -1,3 +1,4 @@
-nuke
-teamcity
-**/*.nupkggu
+.nuke
+.teamcity
+workflows
+**/*.nupkg
