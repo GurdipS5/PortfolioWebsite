@@ -25,6 +25,7 @@ using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using System.IO;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 [TeamCity(AutoGenerate = true), TeamCityToken("test", "c202f1a5-e758-4ae4-be74-8dbb2fda3483")]
 class Build : NukeBuild
@@ -255,12 +256,13 @@ class Build : NukeBuild
         var gitCommand = "git";
         var gitAddArgument = @"add -A";
         var gitCommitArgument = @"commit -m ""chore(ci): checking in changed code from local ci""";
-        var gitPushArgument =
-          $@"push https://{GithubKey}@github.com/{Repository.GetGitHubOwner()}/{repoName}";
+        var gitPushArgument = $@"push https://{GithubKey}@github.com/{Repository.GetGitHubOwner()}/{repoName}";
+
+        string replacement = Regex.Replace(gitPushArgument, @"\t|\n|\r", "");
 
         Process.Start(gitCommand, gitAddArgument).WaitForExit();
         Process.Start(gitCommand, gitCommitArgument).WaitForExit();
-        Process.Start(gitCommand, gitPushArgument).WaitForExit();
+        Process.Start(gitCommand, replacement).WaitForExit();
       }
 
     });
