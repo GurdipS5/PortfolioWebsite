@@ -91,7 +91,7 @@ class Build : NukeBuild
 
   public string OctopusChannel { get; set; }
 
-  public string progetUrl { get; set; } = "http://proget.gssira.com:8624/upack/Portfolio";
+  public string progetUrl { get; set; } = "http://proget.gssira.com:8624/feeds/PortfolioApp";
 
   readonly AbsolutePath packagePath = RootDirectory / "staging" / "output.zip";
 
@@ -250,8 +250,6 @@ class Build : NukeBuild
 
         Log.Information(repoName);
         Log.Information(Repository.Endpoint);
-
-
 
         var gitCommand = "git";
         var gitAddArgument = @"add -A";
