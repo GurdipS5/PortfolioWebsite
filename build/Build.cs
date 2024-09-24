@@ -4,6 +4,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Security.Policy;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text;
 using CliWrap;
 using CliWrap.Buffered;
@@ -222,14 +225,24 @@ class Build : NukeBuild
     .AssuredAfterFailure()
     .Executes(async () =>
     {
-
       string jsonString = File.ReadAllText("package.json");
 
-      // Parse the JSON
-      JsonDocument jsonDoc = JsonDocument.Parse(jsonString);
 
-      // Get a specific value, e.g., "version"
-      OctopusVersion = jsonDoc.RootElement.GetProperty("version").GetString();
+
+        // Parse the JSON into a JsonNode (or JsonObject)
+        JsonNode jsonNode = JsonNode.Parse(jsonString);
+
+
+                // Modify a property
+                jsonNode["version"] = OctopusVersion;
+
+                // Convert the updated JSON back to a string
+                string modifiedJsonString = jsonNode.ToJsonString(new JsonSerializerOptions { WriteIndented = true });
+
+                // Write the modified JSON string back to the file
+                File.WriteAllText("package.json", modifiedJsonString);
+
+                Console.WriteLine("File updated successfully!");
 
       Log.Information(OctopusVersion);
     });

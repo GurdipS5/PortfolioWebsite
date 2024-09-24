@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>GurdipPortfolio</id>
-    <version>1.0.30+e591fee555</version>
+    <version>1.0.31+641b4c529f</version>
     <authors>YourName</authors>
     <owners>YourName</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
