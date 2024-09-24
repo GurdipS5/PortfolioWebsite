@@ -230,6 +230,8 @@ class Build : NukeBuild
 
       // Get a specific value, e.g., "version"
       OctopusVersion = jsonDoc.RootElement.GetProperty("version").GetString();
+
+      Log.Information(OctopusVersion);
     });
 
     Target SetNuSpecVersion => _ => _

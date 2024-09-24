@@ -2,11 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>GurdipPortfolio</id>
-    <version>1.0.29+14be552d3f</version>
+    <version>1.0.30+e591fee555</version>
     <authors>YourName</authors>
     <owners>YourName</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Your package description goes here.</description>
+   </metadata>
   <files>
      <!-- Include all .dll files from bin\Debug -->
       <file src="README.md" target="content" />
@@ -14,5 +15,6 @@
       <!-- Include everything from the content folder -->
       <file src="dist\**\*" target="content" />
   </files>
+
 </package>
 
