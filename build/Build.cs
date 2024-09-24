@@ -233,7 +233,7 @@ class Build : NukeBuild
     });
 
     Target SetNuSpecVersion => _ => _
-        .DependsOn(Changelog)
+        .DependsOn(SetOctopusVersion)
         .Description("")
         .AssuredAfterFailure()
         .Executes(async () =>
@@ -244,7 +244,7 @@ class Build : NukeBuild
 
 
   Target CheckInGit => _ => _
-    .DependsOn(SetOctopusVersion)
+    .DependsOn(SetNuSpecVersion)
     .Description("")
     .AssuredAfterFailure()
     .Executes(async () =>
