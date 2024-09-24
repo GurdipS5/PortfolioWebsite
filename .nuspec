@@ -20,3 +20,4 @@
       <file src="dist\**\*" target="content" />
   </files>
 </package>
+

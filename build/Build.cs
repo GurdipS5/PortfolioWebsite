@@ -96,7 +96,7 @@ class Build : NukeBuild
 
   readonly static AbsolutePath packagePath = RootDirectory / "staging" ;
 
-  readonly static string NukpgPath = packagePath.GlobFiles("*.nupkg").First();
+
 
   /// <summary>
   /// Zip file for Octopus Deploy is stored here.
@@ -311,8 +311,12 @@ class Build : NukeBuild
     .AssuredAfterFailure()
     .Executes(() =>
     {
-      string package = packagePath.GlobFiles("*.nupkg").First();
-      NuGet($"push {package} {ProGetApiKey} -Source {progetUrl}");
+      string package = "";
+
+     var filePath = Directory.GetFiles(packagePath.ToString(), "*.nupkg").FirstOrDefault();
+
+      // packagePath.GlobFiles("*.nupkg").First();
+     NuGet($"push {filePath} {ProGetApiKey} -Source {progetUrl}");
     });
 
   /// <summary>
