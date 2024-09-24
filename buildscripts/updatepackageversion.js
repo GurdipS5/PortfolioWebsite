@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Path to package.json (you can customize this if needed)
-const filePath = path.join(__dirname, 'package.json');
+const filePath = path.join(__dirname, '..', 'package.json');
 
 // New version (replace this with your desired version)
 const newVersion = '1.0.1';
