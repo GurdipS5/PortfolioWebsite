@@ -225,26 +225,7 @@ class Build : NukeBuild
     .AssuredAfterFailure()
     .Executes(async () =>
     {
-      string jsonString = File.ReadAllText("package.json");
-
-
-
-        // Parse the JSON into a JsonNode (or JsonObject)
-        JsonNode jsonNode = JsonNode.Parse(jsonString);
-
-
-                // Modify a property
-                jsonNode["version"] = OctopusVersion;
-
-                // Convert the updated JSON back to a string
-                string modifiedJsonString = jsonNode.ToJsonString(new JsonSerializerOptions { WriteIndented = true });
-
-                // Write the modified JSON string back to the file
-                File.WriteAllText("package.json", modifiedJsonString);
-
-                Console.WriteLine("File updated successfully!");
-
-      Log.Information(OctopusVersion);
+            Npm("run set-version-package");
     });
 
     Target SetNuSpecVersion => _ => _

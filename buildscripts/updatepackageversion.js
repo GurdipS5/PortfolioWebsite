@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Path to the .nuspec file
-const nuspecPath = path.resolve(__dirname, '..', '.nuspec');
+const nuspecPath = path.resolve(__dirname, '..', 'package.json');
 
 var nbgv = require('nerdbank-gitversioning');
 
