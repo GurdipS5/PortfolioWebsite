@@ -14,6 +14,8 @@ p.then((version) => {
   // Retrieve the cloudBuildNumber property
   vv = version.cloudBuildNumber;
 
+  console.log('Version: ', vv);
+
   // Read the package.json file
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
