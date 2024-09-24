@@ -312,7 +312,7 @@ class Build : NukeBuild
     .Executes(() =>
     {
       string package = packagePath.GlobFiles("*.nupkg").First();
-      NuGet($"push {package} {ProGetApiKey} -src {progetUrl}");
+      NuGet($"push {package} {ProGetApiKey} -Source {progetUrl}");
     });
 
   /// <summary>
