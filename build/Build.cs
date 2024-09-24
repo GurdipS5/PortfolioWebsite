@@ -311,7 +311,8 @@ class Build : NukeBuild
     .AssuredAfterFailure()
     .Executes(() =>
     {
-      NuGet($"push {packagePath} {ProGetApiKey} -src {progetUrl}");
+      string package = packagePath.GlobFiles("*.nupkg").First();
+      NuGet($"push {package} {ProGetApiKey} -src {progetUrl}");
     });
 
   /// <summary>
