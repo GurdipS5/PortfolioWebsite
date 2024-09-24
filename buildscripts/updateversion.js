@@ -1,40 +1,34 @@
 const fs = require('fs');
 const path = require('path');
 
-// Path to the .nuspec file
-const nuspecPath = path.resolve(__dirname, '..', '.nuspec');
+// Path to package.json (you can customize this if needed)
+const filePath = path.join(__dirname, 'package.json');
 
-var nbgv = require('nerdbank-gitversioning');
+// New version (replace this with your desired version)
+const newVersion = '1.0.1';
 
-let version = nbgv.getVersion();
+// Read the package.json file
+fs.readFile(filePath, 'utf8', (err, data) => {
+  if (err) {
+    console.error('Error reading package.json file:', err);
+    return;
+  }
 
-let p = Promise.resolve(version);
-let vv = '';
+  // Parse the JSON
+  let packageJson = JSON.parse(data);
 
-// Use .then() to handle the resolved value of the promise
-p.then((version) => {
-  // Retrieve the cloudBuildNumber property
-  vv = version.cloudBuildNumber;
-  console.log(vv); // Output: '1.0.9+cd46792ea3'
+  // Update the version field
+  packageJson.version = newVersion;
 
-  // Now read the .nuspec file after vv is assigned
-  fs.readFile(nuspecPath, 'utf8', (err, data) => {
+  // Convert the modified object back to a JSON string
+  const updatedJson = JSON.stringify(packageJson, null, 2); // Pretty-printing with 2 spaces
+
+  // Write the changes back to package.json
+  fs.writeFile(filePath, updatedJson, 'utf8', (err) => {
     if (err) {
-      console.error(`Error reading .nuspec file: ${err}`);
-      process.exit(1);
+      console.error('Error writing to package.json file:', err);
+    } else {
+      console.log(`Version updated to ${newVersion} successfully!`);
     }
-
-    const updatedData = data.replace(/<version>(.*?)<\/version>/, `<version>${vv}</version>`);
-
-    // Write the updated .nuspec file
-    fs.writeFile(nuspecPath, updatedData, 'utf8', (err) => {
-      if (err) {
-        console.error(`Error writing .nuspec file: ${err}`);
-        process.exit(1);
-      }
-      console.log(`Version updated to ${vv}`);
-    });
   });
-}).catch((error) => {
-  console.error('Error:', error);
 });
