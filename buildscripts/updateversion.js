@@ -12,7 +12,7 @@ p.then((version) => {
   vv = version.cloudBuildNumber;
 
   // Path to package.json (you can customize this if needed)
-  const filePath = path.join(__dirname, '..', 'package.json');
+  const filePath = path.join(__dirname, '..', '.nuspec');
 
   // Read the package.json file
   fs.readFile(filePath, 'utf8', (err, data) => {
@@ -33,9 +33,9 @@ p.then((version) => {
     // Write the changes back to package.json
     fs.writeFile(filePath, updatedJson, 'utf8', (err) => {
       if (err) {
-        console.error('Error writing to package.json file:', err);
+        console.error('Error writing to .nuspec file:', err);
       } else {
-        console.log(`Version updated to ${vv} ccessfully!`);
+        console.log(`Version updated to ${vv} successfully!`);
       }
     });
   });
