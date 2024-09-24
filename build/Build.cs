@@ -232,6 +232,16 @@ class Build : NukeBuild
       OctopusVersion = jsonDoc.RootElement.GetProperty("version").GetString();
     });
 
+    Target SetNuSpecVersion => _ => _
+        .DependsOn(Changelog)
+        .Description("")
+        .AssuredAfterFailure()
+        .Executes(async () =>
+        {
+
+          Npm("run set-version-nuspec");
+        });
+
 
   Target CheckInGit => _ => _
     .DependsOn(SetOctopusVersion)
