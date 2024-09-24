@@ -26,6 +26,7 @@ using static Nuke.Common.IO.PathConstruction;
 using System.IO;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using NuGet.Packaging;
 
 [TeamCity(AutoGenerate = true), TeamCityToken("test", "c202f1a5-e758-4ae4-be74-8dbb2fda3483")]
 class Build : NukeBuild
@@ -93,7 +94,9 @@ class Build : NukeBuild
 
   public string progetUrl { get; set; } = "http://proget.gssira.com:8624/feeds/PortfolioApp";
 
-  readonly AbsolutePath packagePath = RootDirectory / "staging" / "output.zip";
+  readonly static AbsolutePath packagePath = RootDirectory / "staging" ;
+
+  readonly static string NukpgPath = packagePath.GlobFiles("*.nupkg").First();
 
   /// <summary>
   /// Zip file for Octopus Deploy is stored here.
