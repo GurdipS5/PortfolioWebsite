@@ -1,7 +1,7 @@
 {
   "name": "devscard",
   "description": "Template for creating a comprehensive virtual CV for developers.",
-  "version": "1.0.38+d15ab0ac90",
+  "version": "1.0.39+60eb00e3ee",
   "private": true,
   "engines": {
     "node": ">=18",
