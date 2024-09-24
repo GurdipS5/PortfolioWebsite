@@ -1,6 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
+// Path to package.json (you can customize this if needed)
+const filePath = path.join(__dirname, '..', '.nuspec');
+
 var nbgv = require('nerdbank-gitversioning');
 let version = nbgv.getVersion();
 let p = Promise.resolve(version);
@@ -11,13 +14,12 @@ p.then((version) => {
   // Retrieve the cloudBuildNumber property
   vv = version.cloudBuildNumber;
 
-  // Path to package.json (you can customize this if needed)
-  const filePath = path.join(__dirname, '..', '.nuspec');
+  console.log('Version: ', vv);
 
   // Read the package.json file
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
-      console.error('Error reading package.json file:', err);
+      console.error('Error reading .nuspec file:', err);
       return;
     }
 
