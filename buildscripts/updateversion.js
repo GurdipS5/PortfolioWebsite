@@ -28,7 +28,7 @@ p.then((version) => {
     let packageJson = JSON.parse(data);
 
     // Update the version field
-    packageJson.version = newVersion;
+    packageJson.version = vv;
 
     // Convert the modified object back to a JSON string
     const updatedJson = JSON.stringify(packageJson, null, 2); // Pretty-printing with 2 spaces
