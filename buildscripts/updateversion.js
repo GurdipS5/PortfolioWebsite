@@ -25,7 +25,7 @@ p.then((version) => {
     }
 
     // Replace the <version> element with the new version
-    const updatedData = data.replace(/<version>(.*?)<version>/, `<version>${vv}</version>`);
+    const updatedData = data.replace(/<version>(.*?)<\/version>/, `<version>${vv}</version>`);
 
     // Write the updated .nuspec file
     fs.writeFile(nuspecPath, updatedData, 'utf8', (err) => {
