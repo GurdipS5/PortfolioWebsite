@@ -37,7 +37,7 @@ p.then((version) => {
       if (err) {
         console.error('Error writing to package.json file:', err);
       } else {
-        console.log(`Version updated to ${newVersion} successfully!`);
+        console.log(`Version updated to ${vv} successfully!`);
       }
     });
   });

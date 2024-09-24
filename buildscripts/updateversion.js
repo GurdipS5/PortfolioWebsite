@@ -14,9 +14,6 @@ p.then((version) => {
   // Path to package.json (you can customize this if needed)
   const filePath = path.join(__dirname, '..', 'package.json');
 
-  // New version (replace this with your desired version)
-  const newVersion = '1.0.1';
-
   // Read the package.json file
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
