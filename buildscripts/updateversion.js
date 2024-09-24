@@ -1,44 +1,32 @@
 const fs = require('fs');
-const path = require('path');
+const { DOMParser, XMLSerializer } = require('xmldom');
 
-// Path to package.json (you can customize this if needed)
-const filePath = path.join(__dirname, '..', '.nuspec');
+// Path to the XML file one directory above
+const filePath = '../.nuspec'; // Adjust the file name accordingly
 
-var nbgv = require('nerdbank-gitversioning');
-let version = nbgv.getVersion();
-let p = Promise.resolve(version);
-let vv = '';
+// Read the XML file
+fs.readFile(filePath, 'utf8', (err, xmlData) => {
+  if (err) {
+    console.error('Error reading the XML file:', err);
+    return;
+  }
 
-// Use .then() to handle the resolved value of the promise
-p.then((version) => {
-  // Retrieve the cloudBuildNumber property
-  vv = version.cloudBuildNumber;
+  // Parse the XML string into a DOM object
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(xmlData, 'text/xml');
 
-  console.log('Version: ', vv);
+  // Find the <version> element
+  const versionElement = xmlDoc.getElementsByTagName('version')[0];
 
-  // Read the package.json file
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading .nuspec file:', err);
-      return;
-    }
+  // Update the version value
+  if (versionElement) {
+    versionElement.textContent = '2.0'; // Update the version here
+  }
 
-    // Parse the JSON
-    let packageJson = JSON.parse(data);
+  // Serialize the updated XML back into a string
+  const serializer = new XMLSerializer();
+  const updatedXmlString = serializer.serializeToString(xmlDoc);
 
-    // Update the version field
-    packageJson.version = vv;
-
-    // Convert the modified object back to a JSON string
-    const updatedJson = JSON.stringify(packageJson, null, 2); // Pretty-printing with 2 spaces
-
-    // Write the changes back to package.json
-    fs.writeFile(filePath, updatedJson, 'utf8', (err) => {
-      if (err) {
-        console.error('Error writing to .nuspec file:', err);
-      } else {
-        console.log(`Version updated to ${vv} successfully!`);
-      }
-    });
-  });
+  // Output the updated XML
+  console.log(updatedXmlString);
 });

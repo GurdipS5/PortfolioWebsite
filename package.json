@@ -1,7 +1,7 @@
 {
   "name": "devscard",
   "description": "Template for creating a comprehensive virtual CV for developers.",
-  "version": "1.0.42+d0e70d9c78",
+  "version": "1.0.43+f0b258fab0",
   "private": true,
   "engines": {
     "node": ">=18",
@@ -38,7 +38,8 @@
     "iconify-icon": "1.0.8",
     "nanoid": "4.0.2",
     "nerdbank-gitversioning": "3.6.139",
-    "npm": "10.8.1"
+    "npm": "10.8.1",
+    "xmldom": "0.6.0"
   },
   "devDependencies": {
     "@astrojs/image": "0.17.2",
