@@ -95,7 +95,7 @@ class Build : NukeBuild
 
   public string OctopusChannel { get; set; }
 
-  public string progetUrl { get; set; } = "http://proget.gssira.com:8624/feeds/PortfolioApp";
+  public string progetUrl { get; set; } = "http://proget.gssira.com:8624/nuget/PortfolioApp";
 
   readonly static AbsolutePath packagePath = RootDirectory / "staging" ;
 

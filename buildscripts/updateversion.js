@@ -1,8 +1,8 @@
 const fs = require('fs');
 const { DOMParser, XMLSerializer } = require('xmldom');
 
-// Path to the XML file one directory above
-const filePath = '../.nuspec'; // Adjust the file name accordingly
+// Path to the .nuspec file one directory above
+const filePath = '../.nuspec'; // Replace with actual file name if needed
 
 // Read the XML file
 fs.readFile(filePath, 'utf8', (err, xmlData) => {
@@ -27,6 +27,12 @@ fs.readFile(filePath, 'utf8', (err, xmlData) => {
   const serializer = new XMLSerializer();
   const updatedXmlString = serializer.serializeToString(xmlDoc);
 
-  // Output the updated XML
-  console.log(updatedXmlString);
+  // Write the updated XML back to the file
+  fs.writeFile(filePath, updatedXmlString, (err) => {
+    if (err) {
+      console.error('Error writing the updated XML file:', err);
+    } else {
+      console.log('Version updated successfully in the .nuspec file!');
+    }
+  });
 });
