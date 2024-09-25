@@ -2,7 +2,7 @@ const fs = require('fs');
 const { DOMParser, XMLSerializer } = require('xmldom');
 
 // Path to the .nuspec file one directory above
-const filePath = '../.nuspec'; // Replace with actual file name if needed
+const filePath = '../devscard/.nuspec'; // Replace with actual file name if needed
 
 // Read the XML file
 fs.readFile(filePath, 'utf8', (err, xmlData) => {
