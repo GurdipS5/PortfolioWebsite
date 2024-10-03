@@ -19,7 +19,9 @@
     <vcs-settings>
       <vcs-entry-ref root-id="Portfolio_HttpsGithubComGurdipS5PortfolioRefsHeadsMain" />
     </vcs-settings>
-    <requirements />
+    <requirements>
+      <exists id="RQ_2" name="Puppeteer" />
+    </requirements>
     <build-triggers>
       <build-trigger id="TRIGGER_8" type="vcsTrigger">
         <parameters>
