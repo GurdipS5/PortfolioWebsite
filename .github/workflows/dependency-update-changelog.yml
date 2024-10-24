@@ -17,14 +17,14 @@ jobs:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: Get project information
         id: projectinfo
-        uses: gregoranders/nodejs-project-info@v0.0.20
+        uses: gregoranders/nodejs-project-info@v0.0.21
       - name: Get next possible versions
         id: semvers
         uses: WyriHaximus/github-action-next-semvers@v1
         with:
           version: ${{ steps.projectinfo.outputs.version }}
       - name: Update package.json version
-        uses: reedyuk/npm-version@1.2.1
+        uses: reedyuk/npm-version@1.2.2
         with:
           version: ${{ steps.semvers.outputs.patch }}
       - name: Update CHANGELOG.md
