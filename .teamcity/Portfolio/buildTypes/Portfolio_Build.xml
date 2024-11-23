@@ -5,6 +5,7 @@
   <settings>
     <parameters>
       <param name="SectionDirctory" value="%system.teamcity.build.checkoutDir%/src/data/sections" />
+      <param name="env.DOTNET_CLI_HOME" value="/tmp" />
     </parameters>
     <build-runners>
       <runner id="jetbrains_powershell" name="" type="jetbrains_powershell">
