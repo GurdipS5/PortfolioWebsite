@@ -3,6 +3,9 @@
   <name>Build</name>
   <description />
   <settings>
+    <options>
+      <option name="checkoutDirectory" value="portfolio" />
+    </options>
     <parameters>
       <param name="SectionDirctory" value="%system.teamcity.build.checkoutDir%/src/data/sections" />
       <param name="env.DOTNET_CLI_HOME" value="/tmp" />
