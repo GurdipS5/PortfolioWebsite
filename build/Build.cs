@@ -28,8 +28,11 @@ class Build : NukeBuild
    [PathVariable("npm")]
    readonly Tool Npm;
 
-  [PathVariable]
+  [PathVariable("cspell")]
   readonly Tool CSpell;
+
+  [PathVariable("npx")]
+  readonly Tool Npx;
 
   [PathVariable("auto-changelog")]
   readonly Tool AutoChangelogTool;
@@ -70,7 +73,8 @@ class Build : NukeBuild
     .DependsOn(NpmInstall)
     .Executes(() =>
     {
-       CSpell("*", SectionDirectory);
+
+       Npx("cspell", SectionDirectory);
     });
 
   Target Prettier => _ => _
