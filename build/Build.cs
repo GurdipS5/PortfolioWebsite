@@ -16,7 +16,7 @@ using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 
-[TeamCity(AutoGenerate = true), TeamCityToken("", "")]
+[TeamCity(AutoGenerate = false), TeamCityToken("", "")]
 class Build : NukeBuild
 {
     /// Support plugins are available for:
