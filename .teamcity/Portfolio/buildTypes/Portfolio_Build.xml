@@ -11,14 +11,6 @@
       <param name="env.DOTNET_CLI_HOME" value="/tmp" />
     </parameters>
     <build-runners>
-      <runner id="jetbrains_powershell" name="" type="jetbrains_powershell">
-        <parameters>
-          <param name="jetbrains_powershell_execution" value="PS1" />
-          <param name="jetbrains_powershell_script_file" value="build.ps1" />
-          <param name="jetbrains_powershell_script_mode" value="FILE" />
-          <param name="teamcity.step.mode" value="default" />
-        </parameters>
-      </runner>
       <runner id="simpleRunner" name="" type="simpleRunner">
         <parameters>
           <param name="script.content" value="./build.sh" />
