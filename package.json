@@ -55,7 +55,7 @@
     "move-file-cli": "3.0.0",
     "photoswipe": "5.3.8",
     "postcss": "8.4.38",
-    "prettier": "2.8.8",
+    "prettier": "3.4.1",
     "prettier-plugin-astro": "0.10.0",
     "prettier-plugin-tailwindcss": "0.3.0",
     "puppeteer": "22.11.2",

@@ -74,7 +74,7 @@ class Build : NukeBuild
     .Executes(() =>
     {
 
-       Npx("cspell", SectionDirectory);
+       Npx("cspell lint .n", SectionDirectory);
     });
 
   Target Prettier => _ => _
