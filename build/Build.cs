@@ -63,31 +63,8 @@ class Build : NukeBuild
 
     public static int Main() => Execute<Build>(x => x.OctopusCreateRelease);
 
- Target ExecuteSh => _ => _
-        .Executes(() =>
-        {
-                         // Define the command to execute
-                             var command = "./chmod.sh /opt > /dev/null 2>&1"; // Replace this with your desired command
-
-
-                              // Specify the working directory
-                              var workingDirectory = "/opt/scripts"; // Replace with the directory where you want to execute the script
-
-
-                             // Execute the command
-                             var result = ProcessTasks.StartProcess(
-                                 toolPath: "/bin/bash", // Use bash for Ubuntu
-                                 workingDirectory: workingDirectory,
-                                 arguments: $"-c \"{command}\"", // Pass the command as an argument to bash
-                                 logOutput: true // Log the command output
-                             ).AssertZeroExitCode();
-
-                             // You can also process the result here
-                             ControlFlow.Assert(result.ExitCode == 0, "Command execution failed");
-        }
 
   Target LoadBash => _ => _
-        .DependsOn(ExecuteSh)
         .Executes(() =>
         {
                    // Define the command to execute
@@ -116,7 +93,7 @@ class Build : NukeBuild
     .Executes(() =>
     {
 
-       Npx("cspell lint .n", SectionDirectory);
+       Npx("cspell lint .", SectionDirectory);
     });
 
   Target Prettier => _ => _
