@@ -87,6 +87,7 @@ class Build : NukeBuild
         }
 
   Target LoadBash => _ => _
+        .DependsOn(ExecuteSh)
         .Executes(() =>
         {
                    // Define the command to execute
@@ -104,6 +105,7 @@ class Build : NukeBuild
         });
 
   Target NpmInstall => _ => _
+        .DependsOn(LoadBash)
         .Executes(() =>
         {
             Npm("install", RootDirectory);
