@@ -11,16 +11,16 @@
       <param name="env.DOTNET_CLI_HOME" value="/tmp" />
     </parameters>
     <build-runners>
-      <runner id="simpleRunner" name="" type="simpleRunner">
+      <runner id="ssd" name="ssd" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="./build.sh &gt; /dev/null 2&gt;&amp;1" />
+          <param name="script.content" value="chmod +x ./build.sh &gt; /dev/null 2&gt;&amp;1" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="ssd" name="ssd" type="simpleRunner">
+      <runner id="simpleRunner" name="" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="chmod +x ./build.sh &gt; /dev/null 2&gt;&amp;1" />
+          <param name="script.content" value="./build.sh &gt; /dev/null 2&gt;&amp;1" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
