@@ -64,26 +64,9 @@ class Build : NukeBuild
     public static int Main() => Execute<Build>(x => x.OctopusCreateRelease);
 
 
-  Target LoadBash => _ => _
-        .Executes(() =>
-        {
-          // Define the command to execute
-          var command = "exec bash"; // Replace this with your desired command
 
-          // Execute the command
-          var result = ProcessTasks.StartProcess(
-              toolPath: "/bin/bash", // Use bash for Ubuntu
-              arguments: $"-c {command}", // Pass the command directly without extra quotes
-              logOutput: true // Log the command output
-          ).AssertZeroExitCode();
-
-          // You can also process the result here
-          ControlFlow.Assert(result.ExitCode == 0, "Command execution failed");
-
-        });
 
   Target NpmInstall => _ => _
-        .DependsOn(LoadBash)
         .Executes(() =>
         {
           // Define the command to execute
