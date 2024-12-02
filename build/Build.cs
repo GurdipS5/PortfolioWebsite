@@ -86,7 +86,8 @@ class Build : NukeBuild
         .DependsOn(LoadBash)
         .Executes(() =>
         {
-            Npm("install", RootDirectory);
+                  Logger.Info($"Running 'npm install' in {RootDirectory}...");
+                    ProcessTasks.StartProcess("npm", "install", RootDirectory );
         });
 
   Target CSpellTarget => _ => _
