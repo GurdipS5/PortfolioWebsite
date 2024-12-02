@@ -86,8 +86,16 @@ class Build : NukeBuild
         .DependsOn(LoadBash)
         .Executes(() =>
         {
-                  Logger.Info($"Running 'npm install' in {RootDirectory}...");
-                    ProcessTasks.StartProcess("npm", "install", RootDirectory );
+          // Define the command to execute
+          var command = "npm install"; // Replace this with your desired command
+
+          // Execute the command
+          var result = ProcessTasks.StartProcess(
+              toolPath: "/bin/bash", // Use bash for Ubuntu
+              arguments: $"-c {command}", // Pass the command directly without extra quotes
+              logOutput: true // Log the command output
+          ).AssertZeroExitCode();
+
         });
 
   Target CSpellTarget => _ => _
