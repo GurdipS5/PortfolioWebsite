@@ -83,6 +83,7 @@ class Build : NukeBuild
 
   Target CSpellTarget => _ => _
     .DependsOn(NpmInstall)
+    .AssuredAfterFailure()
     .Executes(() =>
     {
 
