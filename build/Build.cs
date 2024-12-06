@@ -113,7 +113,7 @@ class Build : NukeBuild
         var result = ProcessTasks.StartProcess(
            toolPath: "/bin/bash", // Use bash for Ubuntu
            arguments: $"-c {command}", // Pass the command directly without extra quotes
-           ogOutput: true // Log the command output
+           logOutput: true // Log the command output
                 ).AssertZeroExitCode();
 
     });
@@ -131,7 +131,7 @@ class Build : NukeBuild
               var result = ProcessTasks.StartProcess(
                  toolPath: "/bin/bash", // Use bash for Ubuntu
                  arguments: $"-c {command}", // Pass the command directly without extra quotes
-                 ogOutput: true // Log the command output
+                 logOutput: true // Log the command output
                       ).AssertZeroExitCode();
 
     });
@@ -148,7 +148,7 @@ class Build : NukeBuild
                     var result = ProcessTasks.StartProcess(
                        toolPath: "/bin/bash", // Use bash for Ubuntu
                        arguments: $"-c {command}", // Pass the command directly without extra quotes
-                       ogOutput: true // Log the command output
+                       logOutput: true // Log the command output
                             ).AssertZeroExitCode();
     });
 
@@ -165,14 +165,14 @@ class Build : NukeBuild
                           var result = ProcessTasks.StartProcess(
                              toolPath: "/bin/bash", // Use bash for Ubuntu
                              arguments: $"-c {command}", // Pass the command directly without extra quotes
-                             ogOutput: true // Log the command output
+                             logOutput: true // Log the command output
                                   ).AssertZeroExitCode();
     });
 
   Target SetVersion => _ => _
     .DependsOn(PostInstall)
     .AssuredAfterFailure()
-    .Executes(async () =>
+    .Executes(() =>
     {
 
                     // Define the command to execute
@@ -182,7 +182,7 @@ class Build : NukeBuild
                               var result = ProcessTasks.StartProcess(
                                  toolPath: "/bin/bash", // Use bash for Ubuntu
                                  arguments: $"-c {command}", // Pass the command directly without extra quotes
-                                 ogOutput: true // Log the command output
+                                 logOutput: true // Log the command output
                                       ).AssertZeroExitCode();
 
 
