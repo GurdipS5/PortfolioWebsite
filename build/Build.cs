@@ -142,7 +142,7 @@ class Build : NukeBuild
     .Executes(() =>
     {
                    // Define the command to execute
-                   var command = "run build"; // Replace this with your desired command
+                   var command = "npm run build"; // Replace this with your desired command
 
                    // Execute the command
                     var result = ProcessTasks.StartProcess(
