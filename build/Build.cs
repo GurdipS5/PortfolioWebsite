@@ -125,7 +125,7 @@ class Build : NukeBuild
     {
 
              // Define the command to execute
-             var command = "run prettier:check"; // Replace this with your desired command
+             var command = "npm run prettier:write"; // Replace this with your desired command
 
              // Execute the command
               var result = ProcessTasks.StartProcess(
@@ -159,7 +159,7 @@ class Build : NukeBuild
     {
 
                          // Define the command to execute
-                         var command = "run generate-favicons"; // Replace this with your desired command
+                         var command = "npm run generate-favicons"; // Replace this with your desired command
 
                          // Execute the command
                           var result = ProcessTasks.StartProcess(
