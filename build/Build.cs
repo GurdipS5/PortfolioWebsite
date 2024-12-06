@@ -87,7 +87,16 @@ class Build : NukeBuild
     .Executes(() =>
     {
 
-       Npx("cspell lint .", SectionDirectory);
+          // Define the command to execute
+          var command = "npx cspell lint ."; // Replace this with your desired command
+
+          // Execute the command
+          var result = ProcessTasks.StartProcess(
+              toolPath: "/bin/bash", // Use bash for Ubuntu
+              arguments: $"-c {command}", // Pass the command directly without extra quotes
+              logOutput: true // Log the command output
+          ).AssertZeroExitCode();
+
     });
 
   Target Prettier => _ => _
@@ -96,7 +105,16 @@ class Build : NukeBuild
     .Executes(async () =>
     {
 
-      Npm("run prettier:check");
+
+       // Define the command to execute
+       var command = "run prettier:check""; // Replace this with your desired command
+
+       // Execute the command
+        var result = ProcessTasks.StartProcess(
+           toolPath: "/bin/bash", // Use bash for Ubuntu
+           arguments: $"-c {command}", // Pass the command directly without extra quotes
+           ogOutput: true // Log the command output
+                ).AssertZeroExitCode();
 
     });
 
@@ -106,7 +124,15 @@ class Build : NukeBuild
     .Executes(async () =>
     {
 
-      Npm("run prettier:write");
+             // Define the command to execute
+             var command = "run prettier:check"; // Replace this with your desired command
+
+             // Execute the command
+              var result = ProcessTasks.StartProcess(
+                 toolPath: "/bin/bash", // Use bash for Ubuntu
+                 arguments: $"-c {command}", // Pass the command directly without extra quotes
+                 ogOutput: true // Log the command output
+                      ).AssertZeroExitCode();
 
     });
 
@@ -115,7 +141,15 @@ class Build : NukeBuild
     .AssuredAfterFailure()
     .Executes(() =>
     {
-      Npm("run build", RootDirectory);
+                   // Define the command to execute
+                   var command = "run build"; // Replace this with your desired command
+
+                   // Execute the command
+                    var result = ProcessTasks.StartProcess(
+                       toolPath: "/bin/bash", // Use bash for Ubuntu
+                       arguments: $"-c {command}", // Pass the command directly without extra quotes
+                       ogOutput: true // Log the command output
+                            ).AssertZeroExitCode();
     });
 
   Target PostInstall => _ => _
@@ -123,18 +157,35 @@ class Build : NukeBuild
     .AssuredAfterFailure()
     .Executes(() =>
     {
-      Npm("run generate-favicons");
+
+                         // Define the command to execute
+                         var command = "run generate-favicons"; // Replace this with your desired command
+
+                         // Execute the command
+                          var result = ProcessTasks.StartProcess(
+                             toolPath: "/bin/bash", // Use bash for Ubuntu
+                             arguments: $"-c {command}", // Pass the command directly without extra quotes
+                             ogOutput: true // Log the command output
+                                  ).AssertZeroExitCode();
     });
 
   Target SetVersion => _ => _
     .DependsOn(PostInstall)
+    .AssuredAfterFailure()
     .Executes(async () =>
     {
 
-        var result = await Cli.Wrap("cmd")
-          .WithArguments(["nbgv-setversion"])
-          .WithWorkingDirectory(RootDirectory)
-          .ExecuteAsync();
+                    // Define the command to execute
+                             var command = "nbgv-setversion"; // Replace this with your desired command
+
+                             // Execute the command
+                              var result = ProcessTasks.StartProcess(
+                                 toolPath: "/bin/bash", // Use bash for Ubuntu
+                                 arguments: $"-c {command}", // Pass the command directly without extra quotes
+                                 ogOutput: true // Log the command output
+                                      ).AssertZeroExitCode();
+
+
 
     });
 
