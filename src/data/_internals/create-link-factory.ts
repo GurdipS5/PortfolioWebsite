@@ -10,6 +10,6 @@ const createLinkFactory =
     ({
       ...defaultData,
       ...override,
-    } as Readonly<Merge<Link, Override>>);
+    }) as Readonly<Merge<Link, Override>>;
 
 export default createLinkFactory;

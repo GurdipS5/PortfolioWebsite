@@ -2,9 +2,7 @@ module.exports = {
   ci: {
     collect: {
       // Define the URLs to test
-      url: [
-        'https://gurdipsira.dev/'
-      ],
+      url: ['https://gurdipsira.dev/'],
       // Define the number of Lighthouse runs for more reliable results
       numberOfRuns: 3,
       // Set Chrome's flags (e.g., disable storage resets)

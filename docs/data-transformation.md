@@ -17,7 +17,7 @@ cv(
   renameSkillSet('I speak', 'Languages'),
 
   // [portfolio] "Disco Ninjas" project won't be visible
-  hideProject('Disco Ninjas')
+  hideProject('Disco Ninjas'),
 );
 ```
 

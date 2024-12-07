@@ -21,7 +21,7 @@ if (elementsWithTooltipData.length > 0) {
               left: `${x}px`,
               top: `${y}px`,
             });
-          }
+          },
         );
       };
 

@@ -24,9 +24,8 @@ type SkillSets = Sections['skills']['skillSets'];
 
 type SkillSetTitle = SkillSets[number]['title'];
 
-type Filter<T extends Readonly<unknown[]>, P> = T extends Readonly<[infer A, ...infer Rest]>
-  ? [...(A extends P ? [A] : []), ...Filter<Rest, P>]
-  : [];
+type Filter<T extends Readonly<unknown[]>, P> =
+  T extends Readonly<[infer A, ...infer Rest]> ? [...(A extends P ? [A] : []), ...Filter<Rest, P>] : [];
 
 type SkillsBySkillSet<SkillSet extends SkillSetTitle> = Filter<
   SkillSets,
@@ -43,7 +42,7 @@ export const hideJob =
   (role: JobRole, company?: JobCompany): DataTransformer =>
   (draft) => {
     draft.sections.experience.jobs = draft.sections.experience.jobs.filter(
-      (job) => job.role !== role && job.company !== company
+      (job) => job.role !== role && job.company !== company,
     );
   };
 
@@ -51,7 +50,7 @@ export const hideDiploma =
   (title: DiplomaTitle, institution?: DiplomaInstitution): DataTransformer =>
   (draft) => {
     draft.sections.education.diplomas = draft.sections.education.diplomas.filter(
-      (diploma) => diploma.title === title && diploma.institution === institution
+      (diploma) => diploma.title === title && diploma.institution === institution,
     );
   };
 
@@ -71,14 +70,14 @@ export const renameSkillSet =
   (from: SkillSetTitle, to: string): DataTransformer =>
   (draft) => {
     draft.sections.skills.skillSets = draft.sections.skills.skillSets.map((skillSet) =>
-      skillSet.title === from ? { ...skillSet, title: to } : skillSet
+      skillSet.title === from ? { ...skillSet, title: to } : skillSet,
     );
   };
 
 export const hideSkills =
   <SkillSet extends SkillSetTitle>(
     skillSetTitle: SkillSetTitle,
-    skills: SkillsBySkillSet<SkillSet>[]
+    skills: SkillsBySkillSet<SkillSet>[],
   ): DataTransformer =>
   (draft) => {
     draft.sections.skills.skillSets = draft.sections.skills.skillSets.map((skillSet) => {
