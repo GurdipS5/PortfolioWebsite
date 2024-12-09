@@ -18,7 +18,7 @@
     "preview": "astro preview",
     "generate-pdf": "ts-node scripts/generate-pdf.ts",
     "generate-favicons": "ts-node scripts/generate-favicons.ts",
-    "prettier:check": "prettier --check . --ignore-path .gitignore",
+    "prettier:check": "prettier --check . --config .prettierrc.yaml",
     "prettier:write": "prettier --write . --config .prettierrc.yaml",
     "astro:check": "astro check",
     "ts:check": "tsc --jsx preserve --skipLibCheck",
@@ -30,8 +30,7 @@
     "auto-changelog": "2.4.0",
     "broken-link-checker": "0.6.7",
     "iconify-icon": "1.0.8",
-    "nanoid": "4.0.2",
-    "nerdbank-gitversioning": "3.6.139"
+    "nanoid": "4.0.2"
   },
   "devDependencies": {
     "@astrojs/image": "0.17.2",
@@ -53,6 +52,7 @@
     "locales-ts": "1.0.0",
     "marked": "5.1.1",
     "move-file-cli": "3.0.0",
+    "nerdbank-gitversioning": "3.6.146",
     "photoswipe": "5.3.8",
     "postcss": "8.4.38",
     "prettier": "3.4.1",
