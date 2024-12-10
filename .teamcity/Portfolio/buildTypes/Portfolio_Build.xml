@@ -5,6 +5,7 @@
   <settings>
     <options>
       <option name="checkoutDirectory" value="portfolio" />
+      <option name="checkoutMode" value="ON_AGENT" />
     </options>
     <parameters>
       <param name="SectionDirctory" value="%system.teamcity.build.checkoutDir%/src/data/sections" />
