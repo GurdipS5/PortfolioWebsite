@@ -10,7 +10,7 @@
   <param name="submoduleCheckout" value="CHECKOUT" />
   <param name="teamcity:branchSpec" value="refs/heads/*" />
   <param name="url" value="https://github.com/GurdipS5/PortfolioWebsite" />
-  <param name="useAlternates" value="AUTO" />
+  <param name="useAlternates" value="USE_MIRRORS" />
   <param name="username" value="GurdipS5" />
   <param name="usernameStyle" value="USERID" />
 </vcs-root>
