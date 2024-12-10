@@ -1,3 +1,5 @@
 node_modules
 scripts
 cspell.json
+build
+.teamcity
