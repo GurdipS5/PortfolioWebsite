@@ -3,3 +3,4 @@ scripts
 cspell.json
 build
 .teamcity
+.idea
