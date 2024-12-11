@@ -176,7 +176,7 @@ class Build : NukeBuild
     {
 
                     // Define the command to execute
-                             var command = "nbgv-setversion"; // Replace this with your desired command
+                             var command = "npx nbgv-setversion"; // Replace this with your desired command
 
                              // Execute the command
                               var result = ProcessTasks.StartProcess(
