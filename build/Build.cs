@@ -219,6 +219,7 @@ class Build : NukeBuild
 
   Target OctopusBuildInfo => _ => _
       .DependsOn(Changelog)
+      .AssuredAfterFailure()
         .Executes(async () =>
         {
 
@@ -235,6 +236,7 @@ class Build : NukeBuild
 
     Target OctopusCreateRelease => _ => _
       .DependsOn(OctopusBuildInfo)
+      .AssuredAfterFailure()
       .Executes(() =>
       {
         if (NukeBuild.IsServerBuild)
@@ -251,6 +253,4 @@ class Build : NukeBuild
         }
 
       });
-
-
 }
