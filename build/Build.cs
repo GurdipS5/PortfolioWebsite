@@ -44,7 +44,7 @@ class Build : NukeBuild
 
   public string OctopusVersion = "";
 
-  public string OctopusProject { get; set; }
+  public string OctopusProject { get; set; } = "Portfolio";
 
   public string OctopusChannel { get; set; }
 
@@ -184,11 +184,7 @@ class Build : NukeBuild
                                  arguments: $"-c {command}", // Pass the command directly without extra quotes
                                  logOutput: true // Log the command output
                                       ).AssertZeroExitCode();
-
-
-
     });
-
 
   Target Changelog => _ => _
                 .DependsOn(SetVersion)
@@ -196,12 +192,23 @@ class Build : NukeBuild
                 .AssuredAfterFailure()
                 .Executes(() =>
                 {
-                             AutoChangelogTool($"-v  {OctopusVersion} -o {ChangeLogFile}",
-                            RootDirectory.ToString()); // Use .autochangelog settings in file.
-                });
+
+                   string s = RootDirectory.ToString();
+
+                   // Define the command to execute
+                   var command = "npx auto-changelog -v {OctopusVersion} -o {ChangeLogFile} {s}"; // Replace this with your desired command
+
+                   // Execute the command
+                   var result = ProcessTasks.StartProcess(
+                     toolPath: "/bin/bash", // Use bash for Ubuntu
+                     arguments: $"-c {command}", // Pass the command directly without extra quotes
+                     logOutput: true // Log the command output
+                   ).AssertZeroExitCode();
+
+                               });
 
   Target ZipBuild => _ => _
-    .DependsOn(SetVersion)
+    .DependsOn(Changelog)
     .Description("Creates a changelog of the current commit.")
     .AssuredAfterFailure()
     .Executes(() =>
@@ -214,11 +221,16 @@ class Build : NukeBuild
       .DependsOn(Changelog)
         .Executes(async () =>
         {
-          // Using old cli due to command unavailability.
-          var result = await Cli.Wrap("octo.exe")
-            .WithArguments(["build-information"])
-            .WithWorkingDirectory(RootDirectory)
-            .ExecuteAsync();
+
+        // Define the command to execute
+        var command = "octo build-information"; // Replace this with your desired command
+
+           // Execute the command
+           var result = ProcessTasks.StartProcess(
+             toolPath: "/bin/bash", // Use bash for Ubuntu
+             arguments: $"-c {command}", // Pass the command directly without extra quotes
+             logOutput: true // Log the command output
+           ).AssertZeroExitCode();
         });
 
     Target OctopusCreateRelease => _ => _
@@ -227,7 +239,15 @@ class Build : NukeBuild
       {
         if (NukeBuild.IsServerBuild)
         {
-          OctoCli($"release create -p {OctopusProject} -c {OctopusChannel}");
+          // Define the command to execute
+          var command = "octopus release create -p "; // Replace this with your desired command
+
+          // Execute the command
+          var result = ProcessTasks.StartProcess(
+            toolPath: "/bin/bash", // Use bash for Ubuntu
+            arguments: $"-c {command}", // Pass the command directly without extra quotes
+            logOutput: true // Log the command output
+          ).AssertZeroExitCode();
         }
 
       });
