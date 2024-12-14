@@ -224,7 +224,7 @@ class Build : NukeBuild
         {
 
         // Define the command to execute
-        var command = "octo build-information"; // Replace this with your desired command
+        var command = "octo build-information --server http://octopusd.gssira.com"; // Replace this with your desired command
 
            // Execute the command
            var result = ProcessTasks.StartProcess(
