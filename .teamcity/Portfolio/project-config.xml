@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="25b3d554-859f-475c-9a0d-f198f7960ca0" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="25b3d554-859f-475c-9a0d-f198f7960ca0" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2025.3/project-config.xsd">
   <name>Portfolio</name>
-  <parameters />
   <project-extensions>
     <extension id="PROJECT_EXT_4" type="versionedSettings">
       <parameters>
@@ -13,7 +12,18 @@
         <param name="showChanges" value="false" />
       </parameters>
     </extension>
+    <extension id="PortfolioSecrets" type="OAuthProvider">
+      <parameters>
+        <param name="auth-method" value="approle" />
+        <param name="displayName" value="HashiCorp Vault" />
+        <param name="endpoint" value="approle" />
+        <param name="providerType" value="teamcity-vault" />
+        <param name="role-id" value="2" />
+        <param name="secure:secret-id" value="credentialsJSON:c71d4bc8-fe3f-4567-89b8-2173ccf9d8f0" />
+        <param name="url" value="http://vault.gssira.com:8200" />
+        <param name="vault-namespace" value="Portfolio" />
+      </parameters>
+    </extension>
   </project-extensions>
-  <cleanup />
 </project>
 
