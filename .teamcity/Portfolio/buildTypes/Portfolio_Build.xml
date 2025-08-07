@@ -39,6 +39,7 @@
           <param name="branchFilter" value="+:*" />
           <param name="enableQueueOptimization" value="true" />
           <param name="quietPeriodMode" value="DO_NOT_USE" />
+          <param name="triggerRules" value="-:comment=regex:\[skip ci\]" />
         </parameters>
       </build-trigger>
     </build-triggers>
