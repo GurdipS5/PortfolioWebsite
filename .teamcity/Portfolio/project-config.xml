@@ -18,10 +18,10 @@
         <param name="displayName" value="HashiCorp Vault" />
         <param name="endpoint" value="approle" />
         <param name="providerType" value="teamcity-vault" />
-        <param name="role-id" value="2" />
-        <param name="secure:secret-id" value="credentialsJSON:c71d4bc8-fe3f-4567-89b8-2173ccf9d8f0" />
+        <param name="role-id" value="240535bb-a849-bc3d-989b-f21e46b6ef4c" />
+        <param name="secure:secret-id" value="credentialsJSON:fd7c9eea-ace2-46df-9385-3957c8bfe21b" />
         <param name="url" value="http://vault.gssira.com:8200" />
-        <param name="vault-namespace" value="Portfolio" />
+        <param name="vault-namespace" value="DevOps/Portfolio/" />
       </parameters>
     </extension>
   </project-extensions>
