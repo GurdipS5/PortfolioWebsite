@@ -28,7 +28,7 @@ jobs:
         with:
           version: ${{ steps.semvers.outputs.patch }}
       - name: Update CHANGELOG.md
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             const script = require('.github/scripts/update-changelog.js');
