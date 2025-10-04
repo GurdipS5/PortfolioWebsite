@@ -2,6 +2,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="25b3d554-859f-475c-9a0d-f198f7960ca0" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2025.3/project-config.xsd">
   <name>Portfolio</name>
   <parameters>
+    <param name="COSIGN_KEY" value="" spec="remote remoteType='hashicorp-vault' teamcity_hashicorp_vault_vaultQuery='kv/data/COSIGN_KEY!/cosign_key' display='normal' teamcity_hashicorp_vault_namespace='PortfolioSecrets' projectId='Portfolio'" />
     <param name="env.DTRACK_API_KEY" value="" spec="remote remoteType='hashicorp-vault' teamcity_hashicorp_vault_vaultQuery='kv/data/DTRACK_API_KEY!/a' display='normal' teamcity_hashicorp_vault_namespace='PortfolioSecrets' projectId='Portfolio'" />
   </parameters>
   <project-extensions>
