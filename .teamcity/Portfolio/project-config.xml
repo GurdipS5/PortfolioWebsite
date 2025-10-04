@@ -4,6 +4,7 @@
   <parameters>
     <param name="env.COSIGN_KEY" value="" spec="remote remoteType='hashicorp-vault' teamcity_hashicorp_vault_vaultQuery='kv/data/COSIGN_KEY!/cosign_key' display='normal' teamcity_hashicorp_vault_namespace='PortfolioSecrets' projectId='Portfolio'" />
     <param name="env.DTRACK_API_KEY" value="" spec="remote remoteType='hashicorp-vault' teamcity_hashicorp_vault_vaultQuery='kv/data/DTRACK_API_KEY!/a' display='normal' teamcity_hashicorp_vault_namespace='PortfolioSecrets' projectId='Portfolio'" />
+    <param name="env.OCTOPUS_KEY" value="" spec="remote remoteType='hashicorp-vault' teamcity_hashicorp_vault_vaultQuery='kv/data/OCTOPUS_KEY!/octopus_key' display='hidden' teamcity_hashicorp_vault_namespace='PortfolioSecrets' projectId='Portfolio'" />
   </parameters>
   <project-extensions>
     <extension id="PROJECT_EXT_4" type="versionedSettings">
