@@ -6,6 +6,7 @@
     <param name="env.DTRACK_API_KEY" value="" spec="remote remoteType='hashicorp-vault' teamcity_hashicorp_vault_vaultQuery='kv/data/DTRACK_API_KEY!/a' display='normal' teamcity_hashicorp_vault_namespace='PortfolioSecrets' projectId='Portfolio'" />
     <param name="env.HARBOR_ROBOT" value="" spec="remote remoteType='hashicorp-vault' teamcity_hashicorp_vault_vaultQuery='kv/data/HARBOR_ROBOT!/harbor_robot' display='hidden' teamcity_hashicorp_vault_namespace='PortfolioSecrets' projectId='Portfolio'" />
     <param name="env.OCTOPUS_KEY" value="" spec="remote remoteType='hashicorp-vault' teamcity_hashicorp_vault_vaultQuery='kv/data/OCTOPUS_KEY!/octopus_key' display='normal' teamcity_hashicorp_vault_namespace='PortfolioSecrets' projectId='Portfolio'" />
+    <param name="env.blah" value="sdffd" spec="text display='hidden' description='ffdfd' validationMode='any'" />
   </parameters>
   <project-extensions>
     <extension id="PROJECT_EXT_4" type="versionedSettings">
